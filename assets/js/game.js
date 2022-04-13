@@ -27,7 +27,6 @@ var enemyAttack = 12;
 
 var fight = function(enemyName){
     while(enemyHealth > 0 && playerHealth > 0){
-
     
         //checks to see if player wnats to fight or skip//
         var promptFight = window.prompt("Would you like to FIGHT or SKIP this battle? Enter 'FIGHT' or 'SKIP' to choose.")
@@ -42,7 +41,7 @@ var fight = function(enemyName){
             }
         }
         //if they decided to fight run this//
-        if (promptFight === "fight" || promptFight === "FIGHT") {
+        
             //player attack//
             enemyHealth = enemyHealth - playerAttack;
             //log message showing proof//
@@ -73,13 +72,11 @@ var fight = function(enemyName){
                     enemyName + " has attacked " + playerName + ". " + playerName + " now has " + playerHealth + " health remaining."
                 );
             }
-        } 
+         
            
         
         //if they dont know what skip or fight is//
-        else {
-            window.alert("You need to choose a valid option.");
-        }
+        
     }    
 }
        
