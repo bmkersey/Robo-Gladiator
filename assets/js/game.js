@@ -70,25 +70,41 @@ var enemyInfo= [
 
 ];
 
+
+var fightOrSkip = function(){
+    // does player wish to fight
+    var promptFight = window.prompt("Would you like to FIGHT or SKIP this battle? Enter 'FIGHT' or 'SKIP' to choose.")
+
+    if (promptFight === "" || promptFight === null){
+        window.alert("You need to provide a valid answer! Please try again.");
+        return fightOrSkip()
+    }
+
+    promptFight = promptFight.toLowerCase();
+
+    if (promptFight === "skip"){
+        var confirmSkip = window.confirm("Are you sure you want to quit?")
+            if (confirmSkip) {
+                window.alert(playerInfo.name + " has chosen to skip this fight. Goodbye.");
+                playerInfo.money = Math.max(0,playerInfo.money - 10);
+                return true;
+                
+            }
+    } 
+     return false;   
+}
+
 // this creates a function named "Fight" //
 
 var fight = function(enemy){
     
     while(enemy.health > 0 && playerInfo.health > 0){
-    
-        //checks to see if player wnats to fight or skip//
-        var promptFight = window.prompt("Would you like to FIGHT or SKIP this battle? Enter 'FIGHT' or 'SKIP' to choose.")
-
-        if (promptFight === "skip" || promptFight === "SKIP"){
-            var confirmSkip = window.confirm("Are you sure you want to quit?")
-            if (confirmSkip) {
-                window.alert(playerInfo.name + " has chosen to skip this fight. Goodbye.");
-                playerInfo.money = Math.max(0,playerInfo.money - 10);
-                console.log("playerInfo.money", playerInfo.money)
-                break;
-            }
+        if (fightOrSkip()){
+            break;
         }
-         //if they decided to fight run this//
+    
+           
+
         
             //player attack//
         var damage = randomNumber(playerInfo.attack-3, playerInfo.attack)
@@ -120,12 +136,13 @@ var fight = function(enemy){
                 enemy.name + " has attacked " + playerInfo.name + " for " + damage + " damage. " + playerInfo.name + " now has " + playerInfo.health + " health remaining."
                 );
             };
-         
+    }    
            
         
         
 
-    }
+        
+        
 }  
 //runs fight function//
 var startGame = function(){
